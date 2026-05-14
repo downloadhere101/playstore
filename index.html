@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>APKVault — Download Android Apps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⬡ APKVault</a>
+    <div class="nav-links">
+      <a href="index.html">Browse</a>
+      <a href="upload.html" class="btn-upload">+ Upload APK</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Free Android Apps</span>
+    <h1>Download Any<br/><em>Android App</em><br/>Instantly</h1>
+    <p>Upload, discover, and install APK files directly on your Android device. No account needed.</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search apps, games, tools…" oninput="filterApps()"/>
+      <button onclick="filterApps()">Search</button>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+
+  <section class="category-strip">
+    <button class="cat-btn active" onclick="setCategory('all', this)">All</button>
+    <button class="cat-btn" onclick="setCategory('tools', this)">Tools</button>
+    <button class="cat-btn" onclick="setCategory('health', this)">Health</button>
+    <button class="cat-btn" onclick="setCategory('games', this)">Games</button>
+    <button class="cat-btn" onclick="setCategory('social', this)">Social</button>
+    <button class="cat-btn" onclick="setCategory('productivity', this)">Productivity</button>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2>Featured Apps</h2>
+      <span id="app-count" class="count-badge">0 apps</span>
+    </div>
+    <div class="app-grid" id="appGrid">
+      <!-- populated by JS -->
+    </div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-icon">📦</div>
+      <h3>No apps found</h3>
+      <p>Try a different search or <a href="upload.html">upload the first one</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="logo">⬡ APKVault</span>
+    <p>Install APKs at your own risk. Enable "Install from unknown sources" on your device.</p>
+    <p style="margin-top:6px;font-size:11px;opacity:0.4;">© 2026 APKVault</p>
+  </div>
+</footer>
+
+<script src="js/store.js"></script>
+</body>
+</html>

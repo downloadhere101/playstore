@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Upload APK — APKVault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⬡ APKVault</a>
+    <div class="nav-links">
+      <a href="index.html">Browse</a>
+      <a href="upload.html" class="btn-upload active-link">+ Upload APK</a>
+    </div>
+  </div>
+</nav>
+
+<main class="upload-page">
+  <div class="upload-container">
+
+    <div class="upload-header">
+      <h1>Upload Your APK</h1>
+      <p>Share your Android app with the world. Fill in the details below.</p>
+    </div>
+
+    <form id="uploadForm" onsubmit="handleUpload(event)">
+
+      <!-- Drop zone -->
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-inner" id="dropInner">
+          <div class="drop-icon">📦</div>
+          <h3>Drag & drop your APK here</h3>
+          <p>or click to browse files</p>
+          <span class="drop-hint">.apk files only · max 500MB</span>
+          <input type="file" id="apkFile" accept=".apk" hidden onchange="handleFileSelect(this)"/>
+        </div>
+        <div class="file-selected" id="fileSelected" style="display:none;">
+          <div class="file-icon">✅</div>
+          <div class="file-info">
+            <strong id="fileName">file.apk</strong>
+            <span id="fileSize">0 MB</span>
+          </div>
+          <button type="button" class="remove-btn" onclick="removeFile()">✕</button>
+        </div>
+      </div>
+
+      <!-- Icon upload -->
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label>App Icon</label>
+          <div class="icon-upload" id="iconUpload" onclick="document.getElementById('iconFile').click()">
+            <img id="iconPreview" src="" alt="" style="display:none;width:64px;height:64px;border-radius:14px;object-fit:cover;"/>
+            <div id="iconPlaceholder">
+              <span>🖼</span>
+              <small>Upload icon</small>
+            </div>
+          </div>
+          <input type="file" id="iconFile" accept="image/*" hidden onchange="previewIcon(this)"/>
+        </div>
+
+        <div class="form-group" style="flex:1;">
+          <label for="appName">App Name <span class="req">*</span></label>
+          <input type="text" id="appName" placeholder="e.g. NutriScan AI" required/>
+
+          <label for="appVersion" style="margin-top:12px;">Version</label>
+          <input type="text" id="appVersion" placeholder="e.g. 1.0.0"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="appDesc">Description <span class="req">*</span></label>
+        <textarea id="appDesc" rows="4" placeholder="Describe what your app does…" required></textarea>
+      </div>
+
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label for="appCategory">Category <span class="req">*</span></label>
+          <select id="appCategory" required>
+            <option value="">Select category…</option>
+            <option value="tools">Tools</option>
+            <option value="health">Health</option>
+            <option value="games">Games</option>
+            <option value="social">Social</option>
+            <option value="productivity">Productivity</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="appDev">Developer Name</label>
+          <input type="text" id="appDev" placeholder="e.g. John Dela Cruz"/>
+        </div>
+      </div>
+
+      <!-- Screenshots -->
+      <div class="form-group">
+        <label>Screenshots <span class="opt">(optional, up to 4)</span></label>
+        <div class="screenshots-grid" id="screenshotsGrid">
+          <div class="ss-slot" onclick="document.getElementById('ssInput').click()">
+            <span>+</span><small>Add screenshot</small>
+          </div>
+        </div>
+        <input type="file" id="ssInput" accept="image/*" multiple hidden onchange="addScreenshots(this)"/>
+      </div>
+
+      <div class="upload-warning">
+        ⚠️ By uploading, you confirm you have the right to distribute this APK and it contains no malware.
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span id="submitLabel">Publish App</span>
+        <div class="spinner" id="spinner" style="display:none;"></div>
+      </button>
+
+    </form>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="logo">⬡ APKVault</span>
+    <p>Install APKs at your own risk. Enable "Install from unknown sources" on your device.</p>
+  </div>
+</footer>
+
+<!-- Success modal -->
+<div class="modal-overlay" id="successModal" style="display:none;">
+  <div class="modal">
+    <div class="modal-icon">🎉</div>
+    <h2>App Published!</h2>
+    <p id="modalMsg">Your app is now live on APKVault.</p>
+    <div class="modal-actions">
+      <a href="index.html" class="modal-btn primary">Browse Store</a>
+      <button onclick="closeModal()" class="modal-btn secondary">Upload Another</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/upload.js"></script>
+</body>
+</html>
